@@ -10,9 +10,6 @@ module.exports = {
       'react-dom': 'preact/compat',
     }
 
-    // const babelLoader = config.module.rules.find(babelLoaderFinder);
-
-
     return config;
   }
 }
