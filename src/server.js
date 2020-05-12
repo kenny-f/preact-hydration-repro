@@ -3,14 +3,14 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/core';
-import createEmotionServer from 'create-emotion-server';
+// import createCache from '@emotion/cache';
+// import { CacheProvider } from '@emotion/core';
+// import createEmotionServer from 'create-emotion-server';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
-const emotionCache = createCache();
-const { extractCritical } = createEmotionServer(emotionCache);
+// const emotionCache = createCache();
+// const { extractCritical } = createEmotionServer(emotionCache);
 
 const server = express();
 server
@@ -18,13 +18,11 @@ server
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     const context = {};
-    const {html, css, ids} = extractCritical(renderToString(
+    const html = renderToString(
       <StaticRouter context={context} location={req.url}>
-        <CacheProvider value={emotionCache}>
-          <App />
-        </CacheProvider>
+        <App />
       </StaticRouter>
-    ));
+    );
 
     if (context.url) {
       res.redirect(context.url);
@@ -38,16 +36,15 @@ server
         <title>Welcome to Razzle</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${
-          assets.client.css
-            ? `<link rel="stylesheet" href="${assets.client.css}">`
-            : ''
+        assets.client.css
+          ? `<link rel="stylesheet" href="${assets.client.css}">`
+          : ''
         }
         ${
-          process.env.NODE_ENV === 'production'
-            ? `<script src="${assets.client.js}" defer></script>`
-            : `<script src="${assets.client.js}" defer crossorigin></script>`
+        process.env.NODE_ENV === 'production'
+          ? `<script src="${assets.client.js}" defer></script>`
+          : `<script src="${assets.client.js}" defer crossorigin></script>`
         }
-        <style data-emotion-css="${ids.join(' ')}">${css}</style>
     </head>
     <body>
         <div id="root">${html}</div>

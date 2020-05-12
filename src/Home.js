@@ -1,13 +1,14 @@
 import React from 'react';
 import logo from './react.svg';
 import './Home.css';
+import { ThemeContext } from './Theme';
 
 class Home extends React.Component {
   render() {
     const arr = [...Array(300).keys()]
 
     return (
-      <div className="Home" sx={{bg: 'pink'}}>
+      <div className="Home" style={{ background: 'pink' }}>
         <div className="Home-header">
           <img src={logo} className="Home-logo" alt="logo" />
           <h2>Welcome to Razzle</h2>
@@ -27,20 +28,24 @@ class Home extends React.Component {
             <a href="https://palmer.chat">Community Slack</a>
           </li>
         </ul>
-        <div 
-          sx={{
+        <div
+          style={{
             display: 'flex',
             flexWrap: 'wrap',
           }}
         >
           {arr.map((i) => (
-            <div sx={{width: i, height: 50, bg: 'blue', marginRight: 2}}>
-              <div sx={{width: i/2, height: 30, bg: 'red'}}></div>
-            </div>
+            <ThemeContext.Consumer>
+              {({blue}) => <div style={{ width: i, height: 50, background: blue, marginRight: 2 }}>
+                <ThemeContext.Consumer>
+                  {({ red }) => <div style={{ width: i / 2, height: 30, background: red }}></div>}
+                </ThemeContext.Consumer>
+              </div>}
+            </ThemeContext.Consumer>
           ))}
-          <div sx={{width: 20, height: 50, bg: 'red'}}></div>
-          <div sx={{width: 21, height: 50, bg: 'red'}}></div>
-          <div sx={{width: 31, height: 50, bg: 'red'}}></div>
+          <div style={{ width: 20, height: 50, bg: 'red' }}></div>
+          <div style={{ width: 21, height: 50, bg: 'red' }}></div>
+          <div style={{ width: 31, height: 50, bg: 'red' }}></div>
         </div>
       </div>
     );
