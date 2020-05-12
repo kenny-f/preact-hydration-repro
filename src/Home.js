@@ -7,7 +7,7 @@ class Home extends React.Component {
     const arr = [...Array(300).keys()]
 
     return (
-      <div className="Home" sx={{bg: 'pink'}}>
+      <div className="Home" css={{background: 'pink'}}>
         <div className="Home-header">
           <img src={logo} className="Home-logo" alt="logo" />
           <h2>Welcome to Razzle</h2>
@@ -28,19 +28,19 @@ class Home extends React.Component {
           </li>
         </ul>
         <div 
-          sx={{
+          css={{
             display: 'flex',
             flexWrap: 'wrap',
           }}
         >
           {arr.map((i) => (
-            <div sx={{width: i, height: 50, bg: 'blue', marginRight: 2}}>
-              <div sx={{width: i/2, height: 30, bg: 'red'}}></div>
+            <div key={i} css={{width: i, height: 50, background: 'blue', marginRight: 2}}>
+              <div css={{width: i/2, height: 30, background: 'red'}}></div>
             </div>
           ))}
-          <div sx={{width: 20, height: 50, bg: 'red'}}></div>
-          <div sx={{width: 21, height: 50, bg: 'red'}}></div>
-          <div sx={{width: 31, height: 50, bg: 'red'}}></div>
+          <div css={{width: 20, height: 50, background: 'red'}}></div>
+          <div css={{width: 21, height: 50, background: 'red'}}></div>
+          <div css={{width: 31, height: 50, background: 'red'}}></div>
         </div>
       </div>
     );

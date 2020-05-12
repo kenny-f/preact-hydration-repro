@@ -1,23 +1,9 @@
 {
   "presets": [
-    "razzle/babel" // NEEDED
+    "razzle/babel", // NEEDED
+    "@emotion/babel-preset-css-prop"
    ],
    "plugins": [
-    [
-      "@emotion/babel-plugin-jsx-pragmatic",
-      {
-        "module": "theme-ui",
-        "import": "jsx",
-        "export": "jsx"
-      }
-    ],
-    [
-      "@babel/plugin-transform-react-jsx",
-      {
-        "pragma": "jsx",
-        "pragmaFrag": "React.Fragment"
-      }
-    ],
     "emotion"
   ]
 }
