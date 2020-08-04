@@ -1,22 +1,40 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import Home from './Home';
-import { ValueContext } from './ValueContext';
 
-export const MyProvider = ({ children }) => {
-  const [s, setS] = useState('2')
+const App = () => {
+  const [ value, setValue ] = useState('2');
+  console.log("App -> value", value)
+
+  const options = [
+    {
+      value: "0",
+      label: "Zero"
+    },
+    {
+      value: "2",
+      label: "Two"
+    },
+    {
+      value: "3",
+      label: "Three"
+    },
+    {
+      value: "5",
+      label: "Five"
+    }
+  ];
+  console.log("App -> options", options)
 
   return (
-    <ValueContext.Provider value={{ value: s, setValue: setS }}>
-      {children}
-    </ValueContext.Provider>
-  )
+    <select onChange={(e) => setValue(e.target.value)} value={value}>
+      {options.map(({ disabled, label, value }) => (
+        <option key={label} disabled={disabled} value={value}>
+          {label}
+        </option>
+      ))}
+    </select>
+  );
 }
 
-const App = () => (
-  <MyProvider>
-    <Home />
-  </MyProvider>
-);
 
 export default App;
