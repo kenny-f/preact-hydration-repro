@@ -1,8 +1,12 @@
-import App from './App';
+import App, {MyProvider} from './App';
+import Home from './Home';
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import express from 'express';
-import { renderToString } from 'react-dom/server';
+// import { renderToString } from 'react-dom/server';
+
+import renderToString from 'preact-render-to-string';
+
 // import createCache from '@emotion/cache';
 // import { CacheProvider } from '@emotion/core';
 // import createEmotionServer from 'create-emotion-server';
@@ -18,6 +22,7 @@ server
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     const context = {};
+ 
     const html = renderToString(
       <StaticRouter context={context} location={req.url}>
         <App />

@@ -1,4 +1,14 @@
+const path = require('path');
+
+const moduleAlias = require('module-alias');
+
+moduleAlias.addAliases({
+  react: 'preact/compat/dist/compat',
+  'react-dom': 'preact/compat/dist/compat',
+});
+
 import http from 'http';
+
 
 let app = require('./server').default;
 
