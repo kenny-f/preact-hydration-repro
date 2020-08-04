@@ -1,39 +1,38 @@
-import React, { useState } from 'react';
-import './Home.css';
-import { Select } from './Select';
+import { h } from 'preact';
 import { useValueContext } from './ValueContext';
 
 const Home = () => {
   const { value, setValue } = useValueContext();
-  console.log("Home -> value", value)
 
   const options = [
     {
       value: "0",
-      label: "I'm not flexible"
+      label: "Zero"
     },
     {
-      value: "1",
-      label: "I'm flexible +/- 1 day"
+      value: "2",
+      label: "Two"
     },
     {
       value: "3",
-      label: "I'm flexible +/- 3 days"
+      label: "Three"
     },
     {
       value: "5",
-      label: "I'm flexible +/- 5 days"
+      label: "Five"
     }
   ];
 
   return (
-    <Select
-      value={String(value)}
-      onChange={(e) => setValue(parseInt(e.target.value, 10))}
-      options={options}
-    />
-    );
-  }
+    <select onChange={(e) => setValue(e.target.value)} value={value}>
+      {options.map(({ disabled, label, value }) => (
+        <option key={label} disabled={disabled} value={value}>
+          {label}
+        </option>
+      ))}
+    </select>
+  );
+}
 
 
 export default Home;

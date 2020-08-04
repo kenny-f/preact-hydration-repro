@@ -1,20 +1,10 @@
-import App, {MyProvider} from './App';
-import Home from './Home';
-import React from 'react';
-import { StaticRouter } from 'react-router-dom';
+import App from './App';
+import {h} from 'preact';
 import express from 'express';
-// import { renderToString } from 'react-dom/server';
 
 import renderToString from 'preact-render-to-string';
 
-// import createCache from '@emotion/cache';
-// import { CacheProvider } from '@emotion/core';
-// import createEmotionServer from 'create-emotion-server';
-
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
-
-// const emotionCache = createCache();
-// const { extractCritical } = createEmotionServer(emotionCache);
 
 const server = express();
 server
@@ -22,11 +12,9 @@ server
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     const context = {};
- 
+
     const html = renderToString(
-      <StaticRouter context={context} location={req.url}>
-        <App />
-      </StaticRouter>
+      <App />
     );
 
     if (context.url) {

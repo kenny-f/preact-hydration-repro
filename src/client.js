@@ -1,12 +1,9 @@
 require('preact/debug')
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import React from 'react';
-import { hydrate } from 'react-dom';
+import {h, hydrate} from 'preact';
+
 hydrate(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <App />,
   document.getElementById('root')
 );
 

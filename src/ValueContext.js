@@ -1,8 +1,5 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'preact';
+import { useContext } from 'preact/hooks';
+export const ValueContext = createContext({ value: '2', setValue: () => {}});
 
-export const ValueContext = createContext({ value: 2, setValue: () => {}});
-
-export const useValueContext = () => {
-  const a = useContext(ValueContext)
-  return a;
-}
+export const useValueContext = () => useContext(ValueContext)
